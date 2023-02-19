@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="studentform">
+
+        <form class="form" (ngSubmit)="onSub()">
+            <div class="form-group">
+                <p>ADD NEW STUDENT</p>
+            </div> <br>
+            <div class="form-group">
+
+                <label for="name" class="label">Full Name</label>
+                <input type="text" [(ngModel)]="newStudent.name" class="input" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="course" class="label">Course</label>
+                <input type="text" [(ngModel)]="newStudent.course" class="input" id="course" name="course">
+            </div>
+            <div class="form-group">
+                <label for="grade" class="label">Grade</label>
+                <input type="text" [(ngModel)]="newStudent.grade" class="input" id="grade" name="grade" #grade required>
+            </div>
+
+            <div class="form-group">
+                <label for="balance" class="label">Balance</label>
+                <input type="number" [(ngModel)]="newStudent.balance" class="input" id="balance" name="balance"
+                    required>
+            </div>
+
+
+            <button type="submit" class="button">Add Student</button>
+        </form>
+        <br>
+
+    </div>
+
+    <div class="displaystudents" id="displaystudents">
+        <!-- <p id="added">ADDED STUDENTS</p> -->
+
+        <div class="singlestudent" *ngFor="let newStudent of students"
+            [ngClass]="{'balance-positive': newStudent.balance > 0}" (click)="onEdit(newStudent)">
+            <p>Name: {{ newStudent.name }}</p>
+            <p>Course: {{ newStudent.course }}</p>
+            <p>Grade: {{ newStudent.grade }}</p>
+            <p>Balance: {{ newStudent.balance }}</p>
+            <button type="submit" class="button">UPDATE</button>
+
+        </div>
+        <!-- <p id="hidden" class="hidden">UPDATE FEE BALANCE</p> -->
+
+    </div>
+    <form class="form" *ngIf="editing">
+        <div class="form-group">
+            <label for="balance" class="label">New Balance</label>
+            <input type="number" [(ngModel)]="selectedStudent.balance" class="input" id="balance" name="balance"
+                required>
+        </div>
+        <button type="submit" class="button" (click)="onUpdate()">Update Balance</button>
+    </form>
+
+
+</div>
